@@ -5,12 +5,15 @@
 from pathlib import Path
 import csv
 
+# find the csv file from the folder
 fp_read = Path.cwd()/"csv_reports"/"overheads.csv"
 # print(fp_read.exists())
 
+# open the file 
 with fp_read.open(mode="r", encoding="UTF-8", newline="") as file:
+    # using .reader(), read the cash on hand csv file
     reader = csv.reader(file)
-    next(reader)
+    next(reader) # skip header
 
     # create empty lists to store data
     overheads = []
@@ -19,6 +22,9 @@ with fp_read.open(mode="r", encoding="UTF-8", newline="") as file:
         overheads.append([row[0],row[1]]) 
 
 # print(overheads)
+
+# the function will find the highest overhead category and generate the name
+# of the expense along with the percentage
 
 values = []
 for value in overheads:
@@ -38,10 +44,10 @@ for i , value in enumerate(values):
 
 # Print the highest overhead and its corresponding value
 summary_overheads = f'[HIGHEST OVERHEADS] {name}: {highest_value}%'
-print(summary_overheads)
+# print(summary_overheads)
 
-def write_to_file(filename, content):
-    fp_write = Path.cwd()/"summary_report.txt"
-    fp_write.touch()
-    with fp_write.open(mode="w", encoding="UTF-8" ) as file:
-        file.write(summary_overheads)
+# def write_to_file(filename, content):
+#     fp_write = Path.cwd()/"summary_report.txt"
+#     fp_write.touch()
+#     with fp_write.open(mode="w", encoding="UTF-8" ) as file:
+#         file.write(summary_overheads)

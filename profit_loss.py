@@ -9,8 +9,9 @@ fp_read = Path.cwd()/"csv_reports"/"profit and loss.csv"
 # print(fp_read.exists())
 
 with fp_read.open(mode="r", encoding="UTF-8", newline="") as file:
+    # using .reader(), read the cash on hand csv file
     reader = csv.reader(file)
-    next(reader)
+    next(reader) # skip header
 
     # create empty lists to store data
     pl = []
@@ -21,6 +22,9 @@ with fp_read.open(mode="r", encoding="UTF-8", newline="") as file:
 # print(pl)
 
 def is_list_increasing(lst):
+    """
+    This function check if data is always higher than the previous day
+    """
     for i in range(1, len(lst)):
         if lst[i] <= lst[i-1]:
             return False
@@ -28,9 +32,14 @@ def is_list_increasing(lst):
 
 # If cash is always higher than the previous day, the code will give the cash surplus
 if is_list_increasing(pl):
+    # using if to identify if net profit is lesser than the previous day
     result = "[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n"
     
     def calculate_highest_surplus(data):
+        """
+        This function will calculate the surplus if the 
+        data is always increasing
+        """
         highest_surplus = 0
         previous_value = None
         day_with_highest_surplus = None
@@ -40,6 +49,7 @@ if is_list_increasing(pl):
             value = float(entry[1])
             
             if previous_value is not None:
+                # if condition applies, use operators to compute the difference of the identified days and assign them to surplus
                 surplus = value - previous_value
                 if surplus > highest_surplus:
                     highest_surplus = surplus
@@ -50,13 +60,16 @@ if is_list_increasing(pl):
         return day_with_highest_surplus, highest_surplus
 
     day, highest_surplus = calculate_highest_surplus(pl)
-    result += f"[HIGHEST NET PROFIT SURPLUS] DAY {day}, AMOUNT: USD{highest_surplus:.0f}\n"
+    result += f"[HIGHEST NET PROFIT SURPLUS] , DAY {day}, AMOUNT: , USD{highest_surplus:.0f}\n"
 
 # This function will then calculate and store the deficits
 else:
     result = ""
     
     def calculate_deficit(data):
+        """
+        This function will calculate the deficits if data is not always increasing
+        """
         previous_value = None
         deficit_result = []
         
@@ -65,6 +78,7 @@ else:
             value = int(entry[1])
             
             if previous_value is not None:
+                # if condition applies, use operators to compute the difference of the identified days and assign to deficit
                 deficit = previous_value - value
                 if deficit > 0:  # Only consider positive deficits
                     deficit_result.append((day, deficit))
@@ -78,14 +92,14 @@ else:
     for entry in deficit_list:
         day = entry[0]
         deficit = entry[1]
-        deficit_str = f"[PROFIT DEFICIT] Day: {day}, AMOUNT: USD{deficit}\n"
+        deficit_str = f"[PROFIT DEFICIT] , Day: {day}, AMOUNT: , USD{deficit}\n"
         result += deficit_str
 
 # Write the results to a file
-fp_write = Path.cwd() / "summary_report.txt"
-fp_write.touch()
+# fp_write = Path.cwd() / "summary_report.txt"
+# fp_write.touch()
 
-with fp_write.open(mode="w", encoding="UTF-8") as file:
-    file.write(result)
+# with fp_write.open(mode="w", encoding="UTF-8") as file:
+#     file.write(result)
 
 # print(result)

@@ -15,5 +15,4 @@ with fp_write.open(mode="w", encoding="UTF-8" ) as file:
     file.write(coh_result)
     file.write(pl_result)
 
-
 # hello world

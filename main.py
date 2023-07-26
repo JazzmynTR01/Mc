@@ -4,8 +4,8 @@ from coh import hand
 from coh import result as coh_result
 from profit_loss import pl
 from profit_loss import result as p1_result
-fp_write = Path.cwd()/"summary_report.txt"
 
+fp_write = Path.cwd()/"summary_report.txt"
 fp_write.touch()
 
 

@@ -58,7 +58,7 @@ if is_list_increasing(hand):
         return day_with_highest_surplus, highest_surplus
     
     day, highest_surplus = calculate_highest_surplus(hand)
-    result += f"[HIGHEST CASH SURPLUS] , DAY {day}, AMOUNT: , USD{highest_surplus:.0f}\n"
+    result += f"[HIGHEST CASH SURPLUS] DAY {day}, AMOUNT: USD{highest_surplus:.0f}\n"
 
 else:
     result = ""
@@ -89,7 +89,7 @@ else:
     for entry in deficit_list:
         day = entry[0]
         deficit = entry[1]
-        deficit_str = f"[CASH DEFICIT] , Day: {day}, AMOUNT: , USD{deficit:.0f}\n"
+        deficit_str = f"[CASH DEFICIT] Day: {day}, AMOUNT: USD{deficit:.0f}\n"
         result += deficit_str
 
 # Write the results to a file

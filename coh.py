@@ -31,6 +31,7 @@ def is_list_increasing(list):
         return True
 
 if is_list_increasing(hand):
+    # Print to say that it is a surplus 
     result = "[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n"
 
     def calculate_highest_surplus(data):
@@ -38,23 +39,29 @@ if is_list_increasing(hand):
         This function will calculate the surplus if the 
         data is always increasing
         """
+        # Initialize variables to track the highest surplus and associated day
         highest_surplus = 0
         previous_value = None
         day_with_highest_surplus = None
-        
+       
+       # Loop through each entry in the data list 
         for entry in data:
-            day = entry[0]
-            value = float(entry[1])
+
+            day = entry[0] # Extract day from the entry
+            value = float(entry[1]) # Extract value from the entry
             
             if previous_value is not None:
                 # if condition applies use operators to compute the difference and assign them to surplus
                 surplus = value - previous_value
+
+                # Check if the current surplus is higher than the highest recorded surplus
                 if surplus > highest_surplus:
                     highest_surplus = surplus
-                    day_with_highest_surplus = day
+                    day_with_highest_surplus = day # Update the day with the highest surplus
             
-            previous_value = value
+            previous_value = value  # Update the previous value for the next iteration
         
+         # Return the day and the highest surplus found
         return day_with_highest_surplus, highest_surplus
     
     day, highest_surplus = calculate_highest_surplus(hand)
@@ -68,37 +75,28 @@ else:
         This function will calculate the deficits if data is not always increasing
         """
         previous_value = None
-        result_def = []
+        result_def = [] # Create an empty list to store deficit entries
         
         for entry in data:
-            day = entry[0]
-            value = float(entry[1])
+
+            day = entry[0] # Extract day from the entry
+            value = float(entry[1]) # Extract value from the entry
             
             if previous_value is not None:
                 # if condition applies, use operators to compute the difference of the identified days and assign to deficit
                 deficit = previous_value - value
                 if deficit > 0:  # Only consider positive deficits
-                    result_def.append((day, deficit))
+                    result_def.append((day, deficit)) # Add day and deficit to the list
             
-            previous_value = value
+            previous_value = value # Update the previous value for the next iteration
         
-        return result_def
+        return result_def # Return the list of deficit entries
     
-    deficit_list = calculate_deficit(hand)
+    deficit_list = calculate_deficit(hand)  # Calculate deficits using the provided data
 
     for entry in deficit_list:
         day = entry[0]
         deficit = entry[1]
         deficit_str = f"[CASH DEFICIT] Day: {day}, AMOUNT: USD{deficit:.0f}\n"
-        result += deficit_str
+        result += deficit_str # Concatenate deficit information to the result string
 
-# Write the results to a file
-# fp_write = Path.cwd() / "summary_report.txt"
-# fp_write.touch()
-
-# with fp_write.open(mode="w", encoding="UTF-8") as file:
-#     file.write(result)
-
-# print(result)
-# ≥_≤
-# /_\ 

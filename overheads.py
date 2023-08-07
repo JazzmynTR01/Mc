@@ -23,7 +23,7 @@ with fp_read.open(mode="r", encoding="UTF-8", newline="") as file:
 
 # print(overheads)
 
-# the function will find the highest overhead category and generate the name
+# The function will find the highest overhead category and generate the name
 # of the expense along with the percentage
 
 values = []
@@ -31,23 +31,21 @@ for value in overheads:
     # convert stings into a float 
     value[1] = float(value[1])
     
-    values.append(value[1])
+    values.append(value[1]) # append values to the empty list 
     
 # Find the highest value from the float values
 highest_value = max(values)
 # print(highest_value)
 
 for i , value in enumerate(values):
-    if value == highest_value:
-        name = overheads[i][0]
-    break
+
+    # Check if the current value is equal to the highest value
+    if value == highest_value: 
+        # assign the corresponding overhead name to the 'name' variable
+        name = overheads[i][0] 
+    break # Break the loop when the condition is met
 
 # Print the highest overhead and its corresponding value
 summary_overheads = f'[HIGHEST OVERHEADS] {name}: {highest_value}%'
 # print(summary_overheads)
 
-# def write_to_file(filename, content):
-#     fp_write = Path.cwd()/"summary_report.txt"
-#     fp_write.touch()
-#     with fp_write.open(mode="w", encoding="UTF-8" ) as file:
-#         file.write(summary_overheads)

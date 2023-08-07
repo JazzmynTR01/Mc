@@ -26,7 +26,10 @@ def is_list_increasing(lst):
     This function check if data is always higher than the previous day
     """
     for i in range(1, len(lst)):
+        # Loop through the list starting from the second element
         if lst[i] <= lst[i-1]:
+            # Compare the current element with the previous element
+            # If the current element is less than or equal to the previous element, the data is not increasing
             return False
     return True
 
@@ -40,23 +43,26 @@ if is_list_increasing(pl):
         This function will calculate the surplus if the 
         data is always increasing
         """
-        highest_surplus = 0
-        previous_value = None
-        day_with_highest_surplus = None
+        highest_surplus = 0 # Used to keep track of the highest surplus amount encountered so far
+        previous_value = None # To store the value from the previous day in the loop
+        day_with_highest_surplus = None # To store the day with the highest surplus encountered so far
         
         for entry in data:
             day = entry[0]
-            value = float(entry[1])
+            value = float(entry[1]) # Extract and convert to float
             
-            if previous_value is not None:
+            if previous_value is not None: # Check if there's a valid previous_value 
                 # if condition applies, use operators to compute the difference of the identified days and assign them to surplus
                 surplus = value - previous_value
-                if surplus > highest_surplus:
-                    highest_surplus = surplus
-                    day_with_highest_surplus = day
-                
-            previous_value = value
+
+                if surplus > highest_surplus: # Check if the calculated surplus is greater than the current highest_surplus
+
+                    highest_surplus = surplus # Update highest_surplus with the new surplus
+                    day_with_highest_surplus = day # Update day_with_highest_surplus with the current day
         
+            previous_value = value  # Update previous_value for the next iteration with the current value
+
+        # Return the day with the highest surplus and the value of the highest surplus
         return day_with_highest_surplus, highest_surplus
 
     day, highest_surplus = calculate_highest_surplus(pl)
@@ -70,21 +76,22 @@ else:
         """
         This function will calculate the deficits if data is not always increasing
         """
-        previous_value = None
-        deficit_result = []
+        previous_value = None  # Initialize the previous_value to None
+        deficit_result = [] # Create an empty list to store deficit data
         
         for entry in data:
-            day = int(entry[0])
-            value = int(entry[1])
+            day = int(entry[0]) # Extract and convert to interger
+            value = int(entry[1]) # Extract and convert to interger
             
-            if previous_value is not None:
+            if previous_value is not None: # Check if there's a valid previous_value 
                 # if condition applies, use operators to compute the difference of the identified days and assign to deficit
                 deficit = previous_value - value
                 if deficit > 0:  # Only consider positive deficits
-                    deficit_result.append((day, deficit))
+                    deficit_result.append((day, deficit)) # Append the day and deficit to deficit_result list
             
-            previous_value = value
-        
+            previous_value = value # Update previous_value for the next iteration with the current value
+
+        # Return the list containing tuples of days and their corresponding positive deficits
         return deficit_result
 
     deficit_list = calculate_deficit(pl)
@@ -93,13 +100,5 @@ else:
         day = entry[0]
         deficit = entry[1]
         deficit_str = f"[PROFIT DEFICIT] Day: {day}, AMOUNT: USD{deficit}\n"
-        result += deficit_str
+        result += deficit_str # Append the formatted string to the 'result' variable
 
-# Write the results to a file
-# fp_write = Path.cwd() / "summary_report.txt"
-# fp_write.touch()
-
-# with fp_write.open(mode="w", encoding="UTF-8") as file:
-#     file.write(result)
-
-# print(result)

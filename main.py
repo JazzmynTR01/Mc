@@ -14,7 +14,7 @@ fp_write.touch()
 
 # open the txt file 
 with fp_write.open(mode="w", encoding="UTF-8" ) as file:
-    # write summary in summary_report.txt file
+    # write results in summary_report.txt file
     file.write(f'{oh_result}\n') 
     file.write(coh_result)
     file.write(p1_result)

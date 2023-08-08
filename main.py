@@ -3,8 +3,8 @@ from pathlib import Path
 # import final results as module in main.py
 from overheads import summary_overheads as oh_result
 from coh import result as coh_result
-from profit_loss import result as pl_result
 from profit_loss import pl
+from profit_loss import result as p1_result
 
 
 fp_write = Path.cwd()/"summary_report.txt"

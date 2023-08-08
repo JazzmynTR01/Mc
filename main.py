@@ -8,9 +8,9 @@ from profit_loss import pl
 from profit_loss import result as p1_result
 
 
-# fp_write = Path.cwd()/"summary_report.txt"
-# # create the text file
-# fp_write.touch()
+fp_write = Path.cwd()/"summary_report.txt"
+# create the text file
+fp_write.touch()
 
 # open the txt file 
 with fp_write.open(mode="w", encoding="UTF-8" ) as file:

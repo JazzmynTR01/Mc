@@ -26,7 +26,10 @@ def is_list_increasing(list):
         This function check if data is always higher than the previous day
         """
         for i in range(1, len(list)):
+            # Loop through the list starting from the second element
             if list[i] <= list[i-1]:
+            # Compare the current element with the previous element
+            # If the current element is less than or equal to the previous element, the data is not increasing
                 return False
         return True
 

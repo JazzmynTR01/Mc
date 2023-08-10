@@ -54,7 +54,7 @@ def coh_func():
             """
             # Initialize variables to track the highest surplus and associated day
             highest_surplus = 0
-            previous_value = None
+            previous_day = None
             day_with_highest_surplus = None
         
         # Loop through each entry in the data list 
@@ -63,16 +63,16 @@ def coh_func():
                 day = entry[0] # Extract day from the entry
                 value = float(entry[1]) # Extract value from the entry
                 
-                if previous_value is not None:
+                if previous_day is not None:
                     # if condition applies use operators to compute the difference and assign them to surplus
-                    surplus = value - previous_value
+                    surplus = value - previous_day
 
                     # Check if the current surplus is higher than the highest recorded surplus
                     if surplus > highest_surplus:
                         highest_surplus = surplus
                         day_with_highest_surplus = day # Update the day with the highest surplus
                 
-                previous_value = value  # Update the previous value for the next iteration
+                previous_day = value  # Update the previous value for the next iteration
             
             # Return the day and the highest surplus found
             return day_with_highest_surplus, highest_surplus
@@ -91,7 +91,7 @@ def coh_func():
             """
             This function will calculate the deficits if data is not always increasing
             """
-            previous_value = None
+            previous_day = None
             result_def = [] # Create an empty list to store deficit entries
             
             for entry in data:
@@ -99,13 +99,13 @@ def coh_func():
                 day = entry[0] # Extract day from the entry
                 value = float(entry[1]) # Extract value from the entry
                 
-                if previous_value is not None:
+                if previous_day is not None:
                     # if condition applies, use operators to compute the difference of the identified days and assign to deficit
-                    deficit = previous_value - value
+                    deficit = previous_day - value
                     if deficit > 0:  # Only consider positive deficits
                         result_def.append((day, deficit)) # Add day and deficit to the list
                 
-                previous_value = value # Update the previous value for the next iteration
+                previous_day = value # Update the previous value for the next iteration
             
             return result_def # Return the list of deficit entries
         

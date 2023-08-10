@@ -31,13 +31,13 @@ def coh_func():
             hand.append([row[0],row[1]]) 
 
 
-    def is_list_increasing(list):
+    def is_list_increasing(hand):
             """
             This function check if data is always higher than the previous day
             """
-            for i in range(1, len(list)):
+            for i in range(1, len(hand)):
                 # Loop through the list starting from the second element
-                if list[i] <= list[i-1]:
+                if hand[i] <= hand[i-1]:
                 # Compare the current element with the previous element
                 # If the current element is less than or equal to the previous element, the data is not increasing
                     return False

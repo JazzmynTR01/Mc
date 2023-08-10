@@ -31,13 +31,13 @@ def pl_func():
             pl.append([row[0],row[4]])
 
 
-    def is_list_increasing(lst):
+    def is_list_increasing(pl):
         """
         This function check if data is always higher than the previous day
         """
-        for i in range(1, len(lst)):
+        for i in range(1, len(pl)):
             # Loop through the list starting from the second element
-            if lst[i] <= lst[i-1]:
+            if pl[i] <= pl[i-1]:
                 # Compare the current element with the previous element
                 # If the current element is less than or equal to the previous element, the data is not increasing
                 return False

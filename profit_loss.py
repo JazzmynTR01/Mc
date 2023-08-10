@@ -54,23 +54,23 @@ def pl_func():
             data is always increasing
             """
             highest_surplus = 0 # Used to keep track of the highest surplus amount encountered so far
-            previous_value = None # To store the value from the previous day in the loop
+            previous_day = None # To store the value from the previous day in the loop
             day_with_highest_surplus = None # To store the day with the highest surplus encountered so far
             
             for entry in data:
                 day = entry[0]
                 value = float(entry[1]) # Extract and convert to float
                 
-                if previous_value is not None: # Check if there's a valid previous_value 
+                if previous_day is not None: # Check if there's a valid previous_day 
                     # if condition applies, use operators to compute the difference of the identified days and assign them to surplus
-                    surplus = value - previous_value
+                    surplus = value - previous_day
 
                     if surplus > highest_surplus: # Check if the calculated surplus is greater than the current highest_surplus
 
                         highest_surplus = surplus # Update highest_surplus with the new surplus
                         day_with_highest_surplus = day # Update day_with_highest_surplus with the current day
             
-                previous_value = value  # Update previous_value for the next iteration with the current value
+                previous_day = value  # Update previous_day for the next iteration with the current value
 
             # Return the day with the highest surplus and the value of the highest surplus
             return day_with_highest_surplus, highest_surplus
@@ -90,22 +90,22 @@ def pl_func():
             """
             This function will calculate the deficits if data is not always increasing
             """
-            previous_value = None  # Initialize the previous_value to None
+            previous_day = None  # Initialize the previous_day to None
             deficit_result = [] # Create an empty list to store deficit data
             
             for entry in data:
                 day = int(entry[0]) # Extract and convert to interger
                 value = int(entry[1]) # Extract and convert to interger
                 
-                if previous_value is not None: # Check if there's a valid previous_value 
+                if previous_day is not None: # Check if there's a valid previous_day 
                     # if condition applies, use operators to compute the difference of the identified days and assign to deficit
-                    deficit = previous_value - value
+                    deficit = previous_day - value
                     if deficit > 0:  # Only consider positive deficits
                         deficit_result.append((day, deficit)) # Append the day and deficit to deficit_result list
                 
-                previous_value = value # Update previous_value for the next iteration with the current value
+                previous_day = value # Update previous_day for the next iteration with the current value
 
-            # Return the list containing tuples of days and their corresponding positive deficits
+            # Return the list containing tuples of days and their corresponding  deficits
             return deficit_result
 
         deficit_list = calculate_deficit(pl)
